@@ -43,7 +43,8 @@ function decrypt(key, encryptedData) {
 
 	padding = decoded[decoded.length - 1];
 	if (padding) {
-		decoded = decoded.slice(0, decoded.length - padding);
+		// fix: https://github.com/bertrandom/chrome-cookies-secure/issues/63#issuecomment-2467441477
+		decoded = decoded.slice(32, decoded.length - padding);
 	}
 
 	return decoded.toString('utf8');
